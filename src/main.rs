@@ -1,5 +1,8 @@
 use serde::{Deserialize, Serialize};
 
+mod game;
+mod msg;
+
 #[derive(Serialize, Deserialize, Debug)]
 struct UpdateMsg {
     data: [u8; 3],
