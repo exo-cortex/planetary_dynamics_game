@@ -1,15 +1,17 @@
 use serde::{Deserialize, Serialize};
 
-use crate::game::{time, MassiveObject};
+use crate::game::{MassiveObject, PlayerId, Time};
 
 #[derive(Serialize, Deserialize, Debug)]
-enum PlayerAction {
-    NewObject(time, MassiveObject),
+pub enum PlayerAction {
+    NewObject(Time, MassiveObject),
     PauseGame,
     UnPauseGame,
+    WriteMessage(String),
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-enum GameUpdate {
-    PlayerAction(u8, PlayerAction),
+pub struct GameUpdate {
+    pub player: PlayerId,
+    pub action: PlayerAction,
 }
