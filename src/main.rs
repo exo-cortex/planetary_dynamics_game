@@ -12,7 +12,7 @@ fn main() {
         action: PlayerAction::NewObject(
             10.0,
             MassiveObject {
-                location: [0.25, 0.8],
+                location: [0.123, 0.456],
                 velocity: [-0.05, 0.01],
                 mass: 3.21,
                 color: None,
@@ -22,15 +22,16 @@ fn main() {
 
     let update2: GameUpdate = GameUpdate {
         player: 2,
-        action: PlayerAction::WriteMessage("fuck you lololol!".to_string()),
+        action: PlayerAction::WriteMessage("hello player 1!".to_string()),
     };
 
-    let bytes: Vec<u8> = bincode::serialize(&update).unwrap();
+    let bytes: Vec<u8> = bincode::serialize(&update2).unwrap();
     println!("number of bytes: {}\n data: {:02X?}", &bytes.len(), &bytes,);
 
     let newupdate: GameUpdate = bincode::deserialize(&bytes).unwrap();
     println!("bytes: {:?}", newupdate);
 
+    // message dependent actions
     match &newupdate.action {
         PlayerAction::NewObject(_at_time, _new_object) => {
             println!("player #{} created new massive object with coordinates [], velocity [] and mass []", newupdate.player);
